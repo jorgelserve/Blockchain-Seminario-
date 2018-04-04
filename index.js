@@ -1,8 +1,10 @@
 const express = require('express')
 const app = express()
 
-app.get('/', function (req, res) {
-  res.send('<h1>Hola mundo</h1>')        
+
+app.get("/:x", function (req, res){
+  console.log(`someone has entered the ${req.params.x} route`);
+  res.status(200).send(req.params.x);
 })
 
 app.listen(3000, function () {
