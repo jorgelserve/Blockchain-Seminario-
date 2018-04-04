@@ -1,5 +1,5 @@
 ## Blockchain en Javascript
 
-Este es el repositiorio para un sistema de votación basado en blockchain
+Este es el repositorio para un sistema de votación basado en *blockchain*
 
-Fundamentos
+Seminario de Ing de sistemas 
