@@ -1,10 +1,16 @@
 const express = require('express')
 const app = express()
 
-app.get("/", function (req, res){
+app.use(express.static('public'))
+
+app.get('/', function (req, res){
   res.send('Hola mundo')
 })
 
-app.listen(3000, function () {
-  console.log('escuchando en el puerto 3000')
+
+var port = process.env.PORT || 3000
+
+app.listen(port, function () {
+  console.log(`escuchando en el puerto ${port}`)
+  console.log(`http://localhost:${port}`)
 })
