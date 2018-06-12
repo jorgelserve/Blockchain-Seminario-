@@ -4,8 +4,8 @@ module.exports = class Block {
 	constructor(index, timestamp, data, previousHash = '') {
 		this.index = index;
 		this.previousHash = previousHash;
-		this.timestamp = timestamp;
-		this.data = data;
+		this.timestamp = timestamp.getTime();
+		this.data = JSON.stringify(data);
 		this.hash = this.calculateHash();
 	}
 
