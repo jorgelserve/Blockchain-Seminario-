@@ -1,12 +1,14 @@
 const Block = require('./block')
- 
+
+let dataInicial = require('./dataInicial')
+
 module.exports = class Blockchain{
 	constructor() {
 		this.chain = [this.createGenesisBlock()];
 	}
 
 	createGenesisBlock() {
-		return new Block(0, "01/01/2017", "Genesis block", "0");
+		return new Block(0, new Date("01/01/2017"), dataInicial, "0");
 	}
 
 	getLatestBlock() {
