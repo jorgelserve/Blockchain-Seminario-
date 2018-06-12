@@ -4,12 +4,11 @@ const Block = require('../Blockchain/block.js')
 const socket = io.connect('http://localhost:3000')
 
 
-document.getElementById('add').addEventListener('click', add)
 document.getElementById('valid').addEventListener('click', valid)
+document.getElementById('invalid').addEventListener('click', invalid)
 
 
 let elections = new Blockchain()
-var index
 var electionsData
 
 
@@ -25,9 +24,7 @@ socket.on('no valido', function (data) {
 })
 
 socket.on('valido', function (data) {
-	index = elections.getLatestBlock().index
 	electionsData = JSON.parse(elections.getLatestBlock().data)
-	console.log(electionsData)
 	document.getElementById('tablero').innerHTML = electionsData.map(element => {
 		return `<button id="${Object.keys(element)[0]}">${Object.keys(element)[0]}</button>`
 	})
@@ -52,32 +49,29 @@ socket.on('valido', function (data) {
 					electionsData[3].blanco += 1
 					break 
 			}
-			elections.addBlock(new Block(index, new Date(), electionsData))
+			elections.addBlock(new Block(elections.getLatestBlock().index+1, new Date(), electionsData))
+			show()
 			console.log(elections.isChainValid())
-			if (elections.isChainValid()) {
-				socket.emit('nuevo voto', electionsData)
-			}
-			console.log(e.target.id)
+			console.log(JSON.parse(elections.getLatestBlock().data))
 		})
 	})
-
-
 })
 
 
 
-
-
-function add() {
-	elections.addBlock(new Block(index++, new Date("07/20/2017"), { amount: 4 }))
-	index += index
-	console.log('Blockchain valid? ' + elections.isChainValid())
-	console.log(elections.chain[elections.chain.length-1])
+function valid() {
+	if (elections.isChainValid() == true) {
+		alert('La cadena de bloques es valida')
+	} else {
+		alert('La cadena de bloques NO es valida')
+	}
 }
 
-function valid() {
-	// elections.chain[1].data = { amount: 100 }
-	console.log(elections)
-	console.log('Blockchain valid? ' + elections.isChainValid())
+function invalid() {
+	elections.chain[1].data = {"jorge luis serna estuvo aca": null}
+}
+
+function show() {
+	document.getElementById('data').innerHTML = JSON.stringify(elections.getLatestBlock().data, null, 4)
 }
 

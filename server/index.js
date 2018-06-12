@@ -11,6 +11,7 @@ const Block = require('../Blockchain/block.js')
 app.set('view engine', 'pug')
 
 app.use(helmet())
+app.use(helmet.noCache())
 app.use(express.static('./public'))
 
 
@@ -35,12 +36,6 @@ io.on('connection', function (socket) {
 		} else {
 			console.log('Puesto invalido')
 			socket.emit('no valido') 
-		}
-	})
-
-	socket.on('nuevo voto', function (data) {
-		if (elections.isChainValid()) {
-			elections.addBlock(new Block())
 		}
 	})
 })
