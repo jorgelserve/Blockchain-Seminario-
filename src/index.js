@@ -1,7 +1,7 @@
 const SHA256 = require('crypto-js/sha256');
 const Blockchain = require('../Blockchain/blockchain.js')
 const Block = require('../Blockchain/block.js')
-const socket = io.connect('http://localhost:3000')
+const socket = io.connect('https://javascript-blockchain.herokuapp.com')
 
 
 document.getElementById('valid').addEventListener('click', valid)
